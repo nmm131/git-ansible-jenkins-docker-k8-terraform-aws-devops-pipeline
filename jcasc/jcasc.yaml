@@ -1,0 +1,41 @@
+jenkins:
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: ${JENKINS_ADMIN_ID}
+          password: ${JENKINS_ADMIN_PASSWORD}
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+        - "Overall/Administer:admin"
+        - "Overall/Read:authenticated"
+  remotingSecurity:
+    enabled: true
+security:
+  queueItemAuthenticator:
+    authenticators:
+    - global:
+        strategy: triggeringUsersAuthorizationStrategy
+unclassified:
+  location:
+    url: ${JENKINS_IP}
+  resourceRoot:
+    url: "http://localhost:8080/"
+jobs:
+  - script: >
+      job('terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline') {
+        scm {
+          git {
+            remote {
+              url('https://github.com/nmm131/terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline.git')
+            }
+            extensions {
+              cleanBeforeCheckout()
+            }
+          }
+        triggers {
+          scm('* * * * *')
+        }
+      }
+    }
