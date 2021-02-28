@@ -11,4 +11,12 @@ resource "aws_instance" "web" {
   tags = {
     Name = "Jenkins"
   }
+  provisioner "remote-exec" {
+    inline = [
+      "sudo amazon-linux-extras install ansible2 -y",
+      "sudo yum install git -y",
+      "git clone https://github.com/nmm131/terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline.git /tmp/ansible-aws",
+      "ansible-playbook /tmp/ansible-aws/ansible/playbook-install-jenkins-kubernetes.yaml"
+    ]
+  }
 }
