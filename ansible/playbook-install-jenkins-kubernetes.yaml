@@ -1,12 +1,17 @@
 ---
 - hosts: localhost 
   tasks:
-    - name: Install docker
+    - name: Install Docker
       shell: |
         sudo yum update -y
         sudo amazon-linux-extras install docker -y
         sudo service docker start
         sudo usermod -a -G docker ec2-user
+    - name: Install Jenkins
+      # Environment variables pose security risk
+      shell: |
+        sudo docker build -t jenkins:jcasc .
+        sudo docker run -d --name jenkins -p 8080:8080 --env JENKINS_ADMIN_ID=admin --env JENKINS_ADMIN_PASSWORD=password jenkins:jcasc
         #- hosts: ec2-cluster
         #    - name: Install kubernetes
         #      # install Kubernetes
