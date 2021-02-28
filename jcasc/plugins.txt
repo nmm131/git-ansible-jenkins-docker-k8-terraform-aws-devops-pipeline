@@ -37,3 +37,4 @@ docker-workflow:latest
 docker-custom-build-environment:latest
 python:latest
 shiningpanda:latest
+ansible:latest
