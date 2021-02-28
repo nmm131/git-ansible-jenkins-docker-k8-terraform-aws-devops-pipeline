@@ -33,3 +33,7 @@ kubernetes:latest
 terraform:latest
 docker-plugin:latest
 ec2:latest
+docker-workflow:latest
+docker-custom-build-environment:latest
+python:latest
+shiningpanda:latest
