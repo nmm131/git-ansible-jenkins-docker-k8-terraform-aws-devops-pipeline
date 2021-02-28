@@ -10,7 +10,7 @@
     - name: Install Jenkins
       # Environment variables pose security risk
       shell: |
-        sudo docker build -t jenkins:jcasc .
+        sudo docker build -t jenkins:jcasc /tmp/ansible-aws/jcasc
         sudo docker run -d --name jenkins -p 8080:8080 --env JENKINS_ADMIN_ID=admin --env JENKINS_ADMIN_PASSWORD=password jenkins:jcasc
         #- hosts: ec2-cluster
         #    - name: Install kubernetes
