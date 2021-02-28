@@ -24,18 +24,24 @@ unclassified:
     url: "http://localhost:8080/"
 jobs:
   - script: >
-      job('terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline') {
-        scm {
-          git {
+      pipelineJob("terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline") {
+        definition {
+          cpsScm {
+          scm {
+            git {
             remote {
-              url('https://github.com/nmm131/terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline.git')
+              url("https://github.com/nmm131/terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline.git")
             }
             extensions {
-              cleanBeforeCheckout()
+               cleanBeforeCheckout()
+            }
+            branch('main')
             }
           }
-        triggers {
-          scm('* * * * *')
-        }
+          scriptPath("jenkins/Jenkinsfile")
+          triggers {
+            scm('* * * * *')
+          }
+          }
         }
       }
