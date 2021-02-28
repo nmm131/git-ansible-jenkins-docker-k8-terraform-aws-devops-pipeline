@@ -39,8 +39,7 @@ pipeline {
 				node('master') {
 					script {
 						// Deploy application using ansible and kubernetes
-						ansiblePlaybook credentialsId: 'ansible', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: '/tmp/ansible-aws/ansible
-/playbook-deploy-app.yaml'
+						ansiblePlaybook credentialsId: 'ansible', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: '/tmp/ansible-aws/ansible/playbook-deploy-app.yaml'
 					}
 				}
 			}
