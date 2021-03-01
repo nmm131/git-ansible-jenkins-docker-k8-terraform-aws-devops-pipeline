@@ -19,6 +19,7 @@ RUN apk update && \
 	apk upgrade && \
 	apk add docker
 RUN pip install -r requirements.txt
+RUN apk add ansible
 
 # expose a port for the app
 EXPOSE 5000
