@@ -16,7 +16,7 @@ pipeline {
 						script {
                                                         sh 'echo PWD: `pwd`'
 							// Run application
-							sh './flask/python3 app.py &'
+							sh 'python3 ./flask/app.py &'
 							sh 'sleep 1'
 							// Check response of application after running
 							// Stop Jenkins Build if application is not responding
