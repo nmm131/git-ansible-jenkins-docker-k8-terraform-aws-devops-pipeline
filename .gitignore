@@ -23,7 +23,7 @@ terraform_log.txt
 # .tfvars files are managed as part of configuration and so should be included in
 # version control.
 #
-# example.tfvars
+variables.tfvars
 
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in
@@ -118,6 +118,5 @@ $RECYCLE.BIN/
 
 # Secrets
 *.pem
-variables.tf
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,jekyll,windows,linux
