@@ -14,8 +14,9 @@ pipeline {
 				stage('Compile-Package-Test') {
 					steps {
 						script {
+                                                        sh 'echo PWD: `pwd`'
 							// Run application
-							sh 'python3 app.py &'
+							sh './flask/python3 app.py &'
 							sh 'sleep 1'
 							// Check response of application after running
 							// Stop Jenkins Build if application is not responding
