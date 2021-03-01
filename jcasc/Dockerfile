@@ -15,6 +15,9 @@ RUN add-apt-repository \
    stable"
 RUN apt update && \
         apt install -y docker-ce docker-ce-cli containerd.io
+RUN apt update && \
+apt install -y software-properties-common && \
+apt install -y ansible
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 ENV CASC_JENKINS_CONFIG /var/jcasc/jcasc.yaml
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
