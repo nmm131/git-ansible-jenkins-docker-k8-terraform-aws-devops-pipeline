@@ -1,5 +1,6 @@
 FROM jenkins/jenkins:lts
 USER root
+RUN mkdir -p /var/jcasc
 RUN apt update && \
         apt install -y \
            apt-transport-https \
@@ -15,7 +16,7 @@ RUN add-apt-repository \
 RUN apt update && \
         apt install -y docker-ce docker-ce-cli containerd.io
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
-ENV CASC_JENKINS_CONFIG /var/jenkins_home/jcasc.yaml
+ENV CASC_JENKINS_CONFIG /var/jcasc/jcasc.yaml
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
-COPY jcasc.yaml /var/jenkins_home/jcasc.yaml
+COPY jcasc.yaml /var/jcasc/jcasc.yaml
