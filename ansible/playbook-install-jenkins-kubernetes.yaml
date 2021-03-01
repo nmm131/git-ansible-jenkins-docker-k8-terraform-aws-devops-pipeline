@@ -11,7 +11,7 @@
       # Environment variables pose security risk
       shell: |
         sudo docker build -t jenkins:jcasc /tmp/ansible-aws/jcasc
-        sudo docker run -u root -d --name jenkins -p 8080:8080 -v /var/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --env JENKINS_ADMIN_ID=admin --env JENKINS_ADMIN_PASSWORD=password jenkins:jcasc
+        sudo docker run -u root -d --name jenkins -p 8080:8080 -v ~/var/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --env JENKINS_ADMIN_ID=admin --env JENKINS_ADMIN_PASSWORD=password jenkins:jcasc
         #- hosts: ec2-cluster
         #    - name: Install kubernetes
         #      # install Kubernetes
