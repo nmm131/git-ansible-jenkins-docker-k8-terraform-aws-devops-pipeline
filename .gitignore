@@ -118,5 +118,6 @@ $RECYCLE.BIN/
 
 # Secrets
 *.pem
+kubeconfig_my-cluster
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,jekyll,windows,linux
