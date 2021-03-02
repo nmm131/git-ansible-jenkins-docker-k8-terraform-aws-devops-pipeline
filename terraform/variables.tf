@@ -8,8 +8,11 @@ variable "shared_credentials_file" {
   type = string
 }
 variable "ami" {
-  type = string
+  type      = string
   sensitive = true
+}
+variable "eks_instance_type" {
+  type = string
 }
 variable "instance_type" {
   type = string
@@ -18,7 +21,7 @@ variable "key_name" {
   type = string
 }
 variable "aws_security_groups" {
-  type = list
+  type = list(any)
 }
 variable "connection_type" {
   type = string
