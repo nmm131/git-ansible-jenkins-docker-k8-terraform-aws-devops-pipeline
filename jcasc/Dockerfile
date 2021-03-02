@@ -18,6 +18,11 @@ RUN apt update && \
 RUN apt update && \
 apt install -y software-properties-common && \
 apt install -y ansible
+RUN apt update && apt install -y apt-transport-https gnupg2 && \
+        curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+        echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
+        apt update && \
+        apt install -y kubectl
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 ENV CASC_JENKINS_CONFIG /var/jcasc/jcasc.yaml
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
