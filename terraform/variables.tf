@@ -38,4 +38,3 @@ variable "connection_private_key" {
 variable "connection_agent" {
   type = bool
 }
-
