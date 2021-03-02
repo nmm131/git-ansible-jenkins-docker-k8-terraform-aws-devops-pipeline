@@ -108,10 +108,11 @@ resource "aws_instance" "web" {
       "sudo yum install git -y",
       "git clone https://github.com/nmm131/terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline.git /tmp/ansible-aws",
       "ansible-playbook /tmp/ansible-aws/ansible/playbook-install-jenkins-kubernetes.yaml"
+      "sudo mkdir /home/ec2-user/.kube"
     ]
   }
   provisioner "file" {
-    source = "/home/master/terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline/terraform/kubeconfig_my-cluster"
+    source      = "/home/master/terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline/terraform/kubeconfig_my-cluster"
     destination = "/home/ec2-user/.kube/config"
   }
 }
