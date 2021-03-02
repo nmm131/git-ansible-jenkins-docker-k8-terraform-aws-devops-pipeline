@@ -14,7 +14,6 @@ pipeline {
 				stage('Compile-Package-Test') {
 					steps {
 						script {
-                                                        sh 'echo PWD: `pwd`'
 							// Run application
 							sh 'python3 flask/app.py &'
 							sh 'sleep 1'
@@ -39,9 +38,8 @@ pipeline {
 			steps {
 				node('master') {
 					script {
-                                                sh 'echo PWD: `pwd`'
-						// Deploy application using ansible and kubernetes
-						ansiblePlaybook credentialsId: 'ansible', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: '/var/jenkins_home/workspace/terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline/ansible/playbook-deploy-app.yaml'
+						// Deploy application using kubernetes
+                                                kubectl apply -f /var/jenkins_home/terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline/kubernetes/kubernetes-app.yaml
 					}
 				}
 			}
