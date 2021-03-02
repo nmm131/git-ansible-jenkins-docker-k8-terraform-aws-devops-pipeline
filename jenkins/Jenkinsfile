@@ -39,7 +39,7 @@ pipeline {
 				node('master') {
 					script {
 						// Deploy application using kubernetes
-                                                kubectl apply -f /var/jenkins_home/terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline/kubernetes/kubernetes-app.yaml
+                                                sh 'kubectl apply -f /var/jenkins_home/workspace/terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline/kubernetes/kubernetes-app.yaml'
 					}
 				}
 			}
