@@ -106,17 +106,26 @@ resource "aws_instance" "web" {
       "sudo sh -c 'echo [ec2-cluster] >> /etc/ansible/hosts'",
       "sudo sh -c 'echo `curl http://checkip.amazonaws.com` >> /etc/ansible/hosts'",
       "sudo yum install git -y",
-      "sudo mkdir /home/ec2-user/.kube"
+      "sudo mkdir /home/ec2-user/.kube",
+      "git clone https://github.com/nmm131/terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline.git /tmp/ansible-aws",
+      "ansible-playbook /tmp/ansible-aws/ansible/playbook-install-jenkins-kubernetes.yaml"
     ]
   }
   provisioner "file" {
-    source      = "/home/master/terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline/terraform/kubeconfig_my-cluster"
-    destination = "/home/ec2-user/.kube/config"
+    source      = "kubeconfig_my-cluster"
+    destination = "/tmp/kubeconfig_my-cluster"
+    connection {
+      type        = var.connection_type
+      host        = aws_instance.web.public_ip
+      user        = var.connection_user
+      port        = var.connection_port
+      private_key = file(var.connection_private_key)
+      agent       = var.connection_agent
+    }
   }
   provisioner "remote-exec" {
     inline = [
-      "git clone https://github.com/nmm131/terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline.git /tmp/ansible-aws",
-      "ansible-playbook /tmp/ansible-aws/ansible/playbook-install-jenkins-kubernetes.yaml"
-     ]
-   }
+      "sudo mv /tmp/kubeconfig_my-cluster /home/ec2-user/.kube/config"
+    ]
+  }
 }
