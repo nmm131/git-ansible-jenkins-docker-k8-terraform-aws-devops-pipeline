@@ -4,7 +4,7 @@ apiVersion: apps/v1
 kind: Deployment
 # specify a name and label of deployment
 metadata:
-  name: git-jenkins-ansible-vb-docker-k8
+  name: terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline 
   labels:
     app: app
 # deployment specifications
@@ -35,7 +35,7 @@ apiVersion: v1
 kind: Service
 # specify a name of service
 metadata:
-  name: git-jenkins-ansible-vb-docker-k8-svc
+  name: terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline-svc
 # specify allocating a port
 spec:
   type: NodePort
