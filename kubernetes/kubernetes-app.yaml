@@ -38,7 +38,7 @@ metadata:
   name: terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline-svc
 # specify allocating a port
 spec:
-  type: NodePort
+  type: LoadBalancer 
   selector:
     app: app
   # map container port to allocated node's port  
