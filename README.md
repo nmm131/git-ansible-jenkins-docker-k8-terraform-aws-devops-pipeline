@@ -1,7 +1,7 @@
 # Terraform AWS Ansible Jenkins K8 Elastic Devops Pipeline
 Prerequisites:
 
-1. VM with Terraform and AWSCLI Installed.
+1. VM with Terraform and AWS CLI Installed.
 
 ## Jenkins Configuration as Code (JCASC) on AWS EC2 Instance
 ### Create a key pair
@@ -47,12 +47,11 @@ NOTE: Use `scp` to copy it to your VM if you downloaded the .pem file from anoth
 ## Thoughts
 1. JCASC Environment Variables poses a security risk
 2. Mounting Docker .sock poses a security risk
-3. Ended up installing Docker on jcasc container because trying to pass /usr/bin/causes docker to exit container after 1 second
+3. Ended up installing Docker on jcasc container because trying to mount /usr/bin/docker causes docker container to exit container after 1 second
 4. Automate AWS Key and Security Group
 5. Automate AWS Elasticsearch Domain
-4. How to automate Ansible Credentials and ssh on two machines
-5. How to wait for EKS before EC2 runs `ansible-playbook` command
-5. ****** HOW TO CONFIGURE JENKINS CONTAINER WITH AWS CONFIGURE AND AWS EKS REGION AND KUBECONFIG ----> EASIEST WAY IS JCASC STARTS W/ JOB AND AWS CREDENTIALS VIA DASHBOARD******
+5. How to wait for EKS before EC2 runs the `ansible-playbook` command
+5. How to configure JCASC container with AWS Credentials
 
 ### Help Manually Destroying AWS Cluster
-1. Tearing down cluster manually use this command after: ```terraform state rm module.eks.kubernetes_config_map.aws_auth```
+1. If tearing down the cluster manually, then you might consider use of this command after a failure: ```terraform state rm module.eks.kubernetes_config_map.aws_auth```
