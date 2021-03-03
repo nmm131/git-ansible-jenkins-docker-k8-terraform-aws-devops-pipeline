@@ -3,8 +3,8 @@
 exec > kubernetes-cluster-information-output 2>&1
 
 POD_NAMES=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
-DEPLOYMENT="git-jenkins-ansible-vb-docker-k8"
-SERVICE="git-jenkins-ansible-vb-docker-k8-svc"
+DEPLOYMENT="terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline"
+SERVICE="terraform-aws-ansible-jenkins-k8-elastic-devops-pipeline-svc"
 
 echo "***************
 Get Namespaces:
