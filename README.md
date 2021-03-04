@@ -5,17 +5,17 @@
 
 ## Required by time of the end of this documentation
 
-1. One VM instance
-1. Git
-1. SCM (such as GitHub)
-1. Terraform
-1. AWS CLI
-1. Ansible
-1. Jenkins (specifically Jenkins Configuration as Code)
-1. Docker
-1. Kubernetes
-1. Flask Application
-1. AWS Elasticsearch Domain (Logstash, Elasticsearch, Kibana)
+1. One VM instance (VM for installing Terraform and  therefore provisioning/starting/automating the DevOps pipeline)
+1. Git (Git for managing version control)
+1. SCM (such as GitHub, for storing devops configuration files and application source code)
+1. Terraform (Terraform for defining and provisioning AWS cloud infrastructure)
+1. AWS CLI (AWS CLI for managing AWS services)
+1. Ansible (Ansible for configuring/installing required software on AWS EC2 instances)
+1. Jenkins (specifically Jenkins Configuration as Code, for building, testing and deploying applications on SCM)
+1. Docker (Docker for delivering software in containers)
+1. Kubernetes (Kubernetes for orchestrating containers)
+1. Flask Application (Flask for deployment to a cluster)
+1. AWS Elasticsearch Domain (Logstash for transforming logs and sending to Elasticsearch, Elasticsearch for storing logs in a database and Kibana for visualizing and analyzing data and metrics)
 
 **Many of the above requirements are installed automatically and automated.**
 ## CI/CD with AWS
