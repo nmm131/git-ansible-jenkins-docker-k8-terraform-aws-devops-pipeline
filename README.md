@@ -5,15 +5,17 @@
 
 ## Required by time of the end of this documentation
 
-1. One VM instance (VM for installing Terraform and  therefore provisioning/starting/automating the DevOps pipeline)
+1. Oracle VM VirtualBox (Oracle VM VirtualBox for installing Terraform and  therefore provisioning/starting/automating the DevOps pipeline)
 1. Git (Git for managing version control)
 1. SCM (such as GitHub, for storing devops configuration files and application source code)
+2. AWS (AWS for cloud services)
 1. Terraform (Terraform for defining and provisioning AWS cloud infrastructure)
 1. AWS CLI (AWS CLI for managing AWS services)
 1. Ansible (Ansible for configuring/installing required software on AWS EC2 instances)
 1. Jenkins (specifically Jenkins Configuration as Code, for building, testing and deploying applications on SCM)
 1. Docker (Docker for delivering software in containers)
 1. Kubernetes (Kubernetes for orchestrating containers)
+2. AWS EKS (EKS for running Kubernetes on the cloud)
 1. Flask Application (Flask for deployment to a cluster)
 1. AWS Elasticsearch Domain (Logstash for transforming logs and sending to Elasticsearch, Elasticsearch for storing logs in a database and Kibana for visualizing and analyzing data and metrics)
 
@@ -54,11 +56,14 @@ NOTE: Use `scp` to copy it to your VM if you downloaded the .pem file from anoth
 3. SSH into your EC2 Jenkins Container: ```ssh -i <path_to_key>/<key_name>.pem ec2-user@<ec2_public_ip>``` then run the following commands:
 	1. ```aws configure``` and input `AWS Access Key ID`, `AWS Secret Access Key`, `Default Region Name` and `Default Output Format`.
 	2. ```aws eks --region $(terraform output -raw aws_region) update-kubeconfig --name $(terraform output -raw cluster_name)```
-4. In Jenkins (access the dashboard from a URL), re-build the Jenkins job. Make sure the kube config file copied correctly if not then re-run terraform apply command then re-build the Jenkins job.
+4. In Jenkins (access the dashboard from a URL). Make sure the kube config file copied correctly if not then re-run terraform apply command then re-build the Jenkins job.
+	1. ![Screenshot](documentation/jenkins-dashboard-success.png)
+	2. ![Screenshot](documentation/jenkins-console-success.png)
 5. In EC2 Jenkins Container, run the command: ```kubectl port-forward <pod_name_example_wfjdz> 5000:5000```
 6. Go to your EKS Cluster's `API server endpoint` appended with port 5000 in a browser.
-
-![Screenshot](documentation/flask-on-eks.png)
+	1. ![Screenshot](documentation/flask-on-eks.png)
+2. View your cluster's information and history with kubectl commands: 
+	1. ![Screenshot](documentation/k8-info.png)
 
 
 ## AWS Elasticsearch Service (ES) Monitoring with Metricbeat and Filebeat
@@ -81,8 +86,7 @@ The Elastic Stack makes use of a DaemonSet to ensure all, or some, nodes run a c
 1. Choose Next.
 1. On the Review page, double-check your configuration and choose Confirm. New domains typically take 15-30 minutes to initialize, but can take longer depending on the configuration. After your domain initializes, make note of its endpoint.
 2. Go to your Kibana Endpoint to view your Dashboard:
-
-![Screenshot](documentation/elastic-on-aws.png)
+	1. ![Screenshot](documentation/elastic-on-aws.png)
 
 ### Create Kubernetes Resources:
 1. Clone the kube-state-metrics repository from [https://github.com/kubernetes/kube-state-metrics](https://github.com/kubernetes/kube-state-metrics) This is needed for beat to fully function.
@@ -110,6 +114,10 @@ The Elastic Stack makes use of a DaemonSet to ensure all, or some, nodes run a c
 5. Automate AWS Elasticsearch Domain
 5. How to wait for EKS before EC2 runs the `ansible-playbook` command
 5. How to configure JCASC container with AWS Credentials
+6. If attempting to use Prometheus, use this repo: 
+	1. ```helm repo add prometheus-community https://prometheus-community.github.io/helm-charts```
+	2. ![Screenshot](documentation/prometheus-cluster-info.png)
+
 
 ### Help - Manually Destroying an AWS Cluster:
 1. Some resources do not get destroyed, possibly due to Security Groups or if different IAM Users are trying to access resources. If tearing down the cluster manually, then you might consider use of this command after a failure: ```terraform state rm module.eks.kubernetes_config_map.aws_auth```
