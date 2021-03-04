@@ -3,6 +3,8 @@ Prerequisites:
 
 1. VM with Terraform and AWS CLI Installed.
 
+## CI/CD with AWS:
+![Screenshot](documentation/CI_CD AWS.png)
 ## Jenkins Configuration as Code (JCASC) on AWS EC2 Instance
 ### Create a key pair
 1. Sign in to the Open the [Amazon EC2 console](https://console.aws.amazon.com/ec2/ "Amazon EC2 console").
